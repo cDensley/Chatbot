@@ -13,17 +13,13 @@ public class ChatbotView
 		this.baseController = baseController;
 	}
 	
-	public String showChatbotDialog(String currentInput)
+	public String showChatbot(String currentInput)
 	{
 		String result = "";
 				
-		result = JOptionPane.showInputDialog(null, baseController.getMySillyChatbot().getName() + " says: " + currentInput);
+		JOptionPane.showMessageDialog(null, "Hello, " + currentInput);
+		result = JOptionPane.showInputDialog(null, "are you done?");
 		
 		return result;
-	}
-	
-	public void showChatbotMessage(String currentInput)
-	{
-		JOptionPane.showMessageDialog(null, baseController.getMySillyChatbot().getName() + " says: " + currentInput);
 	}
 }
