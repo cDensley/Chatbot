@@ -1,5 +1,7 @@
 package chatbot.controller;
 
+import java.awt.Component;
+
 import javax.swing.JOptionPane;
 
 import chatbot.model.Chatbot;
@@ -17,6 +19,11 @@ public class ChatbotAppController
 	{
 		applicationView = new ChatbotView(this);
 		mySillyChatbot = new Chatbot("Cortana");
+	}
+	
+	public Component getMySillyChatbot()
+	{
+		return null;
 	}
 	
 	public void start()
