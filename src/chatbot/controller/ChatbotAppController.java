@@ -19,17 +19,19 @@ public class ChatbotAppController
 	
 	public void start()
 	{
-		String result = applicationView.showChatbot("Chandler");
+		String result = applicationView.showChatbotDialog(startMessage);
 		
-		if (mySillyChatbot.quitChecker(result))
+		while(!mySillyChatbot.quitChecker(result))
 		{
-			quit();
+			result = mySillyChatbot.processText(result);
+			result = applicationView.showChatbotDialog(result);
 		}
+		quit();
 	}
 	
 	private void quit()
 	{
-		JOptionPane.showMessageDialog(null, "I'll be back.");
+		applicationView.showChatbotMessage(quitMessage);
 		System.exit(0);
 		
 	}

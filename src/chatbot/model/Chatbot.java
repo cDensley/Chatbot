@@ -1,4 +1,7 @@
 package chatbot.model;
+
+import java.util.ArrayList;
+
 /**
  * The Chatbot model class. Used for checking and manipulating strings.
  * @author Chandler Densley
@@ -7,7 +10,9 @@ package chatbot.model;
 public class Chatbot
 {
 
+	private ArrayList<String> memeList;
 	private String name;
+	private String contentArea;
 	private int chatCount;
 	
 	
@@ -17,10 +22,38 @@ public class Chatbot
 	 */
 	public Chatbot(String name)
 	{
+		memeList = new ArrayList<String>();
 		this.name = name;
 		chatCount = 0;
+		fillTheMemeList();
 	}
 	
+	private void fillTheMemeList()
+	{
+		memeList.add("kitties");
+		memeList.add("one does not simply");
+		memeList.add("doge");
+		memeList.add("doh!");
+		memeList.add("toddler fist");
+		memeList.add("y u no");
+	}
+	
+	public String processText(String currentInput)
+	{
+		String result = "";
+		
+		if(memeChecker(currentInput))
+		{
+			result = "Wow, " + currentInput + " is a meme. Wohoo!";
+		}
+		else
+		{
+			result = "Not a meme, try again";
+		}
+		
+		return result;
+	}
+		
 	/**
 	 * Returns the name of the Chatbot object.
 	 * @return The current name of the Chatbot.
