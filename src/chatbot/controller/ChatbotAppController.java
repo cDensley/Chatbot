@@ -9,6 +9,8 @@ public class ChatbotAppController
 {
 	private ChatbotView applicationView;
 	private Chatbot mySillyChatbot;
+	private String startMessage;
+	private String quitMessage;
 	
 	
 	public ChatbotAppController()
