@@ -11,12 +11,17 @@ import java.util.ArrayList;
 public class Chatbot
 {
 
+	/**
+	 * The programmer supplied list of memes.
+	 */
 	private ArrayList<String> memeList;
+	/**
+	 * The name of the chatbot.
+	 */
 	private String name;
 	private String contentArea;
 	private int chatCount;
 	public String currentInput;
-	private String input;
 	private String currentText;
 
 	/**
