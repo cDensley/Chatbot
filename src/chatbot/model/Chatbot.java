@@ -12,12 +12,9 @@ public class Chatbot
 {
 
 	/**
-	 * The programmer supplied list of memes.
+	 * Sets various things regarding the chatbot and user input.
 	 */
 	private ArrayList<String> memeList;
-	/**
-	 * The name of the chatbot.
-	 */
 	private String name;
 	private String contentArea;
 	private int chatCount;
@@ -37,8 +34,14 @@ public class Chatbot
 		this.name = name;
 		chatCount = 0;
 		fillTheMemeList();
+		contentArea = "music";
 	}
+	
+	
 
+	/**
+	 * Sets the list of memes for the meme checker.
+	 */
 	private void fillTheMemeList()
 	{
 		memeList.add("kitties");
@@ -49,6 +52,11 @@ public class Chatbot
 		memeList.add("y u no");
 	}
 
+	/**
+	 * Selects one of the three checkers randomly and runs it.
+	 * @param currentInput Depending on what the user types.
+	 * @return Based on user input.
+	 */
 	public String processText(String currentInput)
 	{
 		String result = "";
@@ -99,11 +107,27 @@ public class Chatbot
 		return result;
 	}
 
+	/**
+	 * Checker for contentArea.
+	 * @param currentInput User input.
+	 * @return Based on whether or not the user input is the contentArea.
+	 */
 	private boolean contentChecker(String currentInput)
 	{
-		return false;
+		boolean hasContent = false;
+		
+		if (currentInput.contains(contentArea))
+		{
+			hasContent = true;
+		}
+		return hasContent;
 	}
 
+	/**
+	 * Checks to see how long the users input is; measured in characters.
+	 * @param input What the user inputs.
+	 * @return Based on whether or not the user input is less than 20 characters.
+	 */
 	private boolean stringLengthChecker(String input)
 	{
 		boolean isTooLong = false;
@@ -116,6 +140,11 @@ public class Chatbot
 		return isTooLong;
 	}
 
+	/**
+	 * Checks, using the fillTheMemeList, whether or not the user types in a meme.
+	 * @param input What the user inputs.
+	 * @return Based on whether or not the user types in a meme.
+	 */
 	private boolean memeChecker(String input)
 	{
 		boolean isAMeme = false;
@@ -205,8 +234,9 @@ public class Chatbot
 	{
 		boolean okToQuit = false;
 
-		if (input.equalsIgnoreCase("Goodbye"))
+		if (input !=null && input.equalsIgnoreCase("Goodbye"))
 		{
+			
 			okToQuit = true;
 		}
 

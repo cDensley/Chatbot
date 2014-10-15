@@ -1,7 +1,5 @@
 package chatbot.controller;
 
-import java.awt.Component;
-
 import chatbot.model.Chatbot;
 import chatbot.view.ChatbotView;
 
