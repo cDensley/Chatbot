@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import chatbot.controller.ChatbotAppController;
 
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 
 import chatbot.controller.ChatbotAppController;
 
@@ -22,19 +19,30 @@ public class ChatbotPanel extends JPanel
 	private JButton firstButton;
 	private JTextField firstTextField;
 	private SpringLayout baseLayout;
+	private JTextArea chatArea;
+	private JScrollPane chatPane;
 	
 	
 	public ChatbotPanel(ChatbotAppController baseController)
 	{
 		this.baseController = baseController;
 		
-		firstButton = new JButton("Click me!");
+		firstButton = new JButton("Click me if you like smiley faces!");
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
+		chatArea = new JTextArea(5, 20);
+		chatPane = new JScrollPane(chatArea);
 		
+		setupPane();
 		setupPanel();
 		setupLayout();
 		setupListeners();
+	}
+	
+	private void setupPane()
+	{
+		chatArea.setLineWrap(true);
+		chatArea.setWrapStyleWord(true);
 	}
 	
 	/**
@@ -47,6 +55,7 @@ public class ChatbotPanel extends JPanel
 		this.setLayout(baseLayout);
 		this.add(firstButton);
 		this.add(firstTextField);
+		this.add(chatPane);
 	}
 	
 	/**
@@ -58,6 +67,9 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, firstButton);
 		baseLayout.putConstraint(SpringLayout.WEST, firstButton, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 50, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 20, SpringLayout.WEST, this);
+		
 	}
 	
 	private void setupListeners()
@@ -66,7 +78,7 @@ public class ChatbotPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				firstTextField.setText(firstTextField.getText()+ " :D ");
+				firstTextField.setText(firstTextField.getText()+ " :) ");
 			}
 		});
 		
