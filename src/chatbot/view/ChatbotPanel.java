@@ -1,6 +1,8 @@
 package chatbot.view;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
@@ -30,13 +32,14 @@ public class ChatbotPanel extends JPanel
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
 		
-		
-		
 		setupPanel();
 		setupLayout();
 		setupListeners();
 	}
 	
+	/**
+	 * Sets up what our panel will look like including background color, size, buttons/textfields, etc.
+	 */
 	private void setupPanel()
 	{
 		this.setBackground(Color.BLUE);
@@ -46,6 +49,9 @@ public class ChatbotPanel extends JPanel
 		this.add(firstTextField);
 	}
 	
+	/**
+	 * The settings created automatically by the Window Builder.
+	 */
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.NORTH, firstTextField, 10, SpringLayout.NORTH, this);
@@ -56,6 +62,13 @@ public class ChatbotPanel extends JPanel
 	
 	private void setupListeners()
 	{
+		firstButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				firstTextField.setText(firstTextField.getText()+ " :D ");
+			}
+		});
 		
 	}
 	
