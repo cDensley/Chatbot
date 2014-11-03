@@ -27,7 +27,7 @@ public class ChatbotPanel extends JPanel
 	{
 		this.baseController = baseController;
 		
-		firstButton = new JButton("Click me if you like smiley faces!");
+		firstButton = new JButton("Click me!");
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
 		chatArea = new JTextArea(5, 20);
@@ -59,7 +59,7 @@ public class ChatbotPanel extends JPanel
 	}
 	
 	/**
-	 * The settings created automatically by the Window Builder.
+	 * The settings created automatically by the Window Builder for the placement of the items in the window.
 	 */
 	private void setupLayout()
 	{
@@ -78,10 +78,18 @@ public class ChatbotPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				firstTextField.setText(firstTextField.getText()+ " :) ");
+				String currentInput = firstTextField.getText();
+				String result = baseController.getChatbotDialog(currentInput);
+				showTextMessage(currentInput);
+				showTextMessage(result);
+				firstTextField.setText("");
 			}
 		});
 		
 	}
 	
+	public void showTextMessage(String userInput)
+	{
+		chatArea.append("\n" + userInput);
+	}
 }

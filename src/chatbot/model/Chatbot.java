@@ -33,6 +33,7 @@ public class Chatbot
 		memeList = new ArrayList<String>();
 		this.name = name;
 		chatCount = 0;
+		myUser = new ChatbotUser();
 		fillTheMemeList();
 		contentArea = "music";
 	}
@@ -60,8 +61,14 @@ public class Chatbot
 	public String processText(String currentInput)
 	{
 		String result = "";
+		
+		if(getChatCount() < 7)
+		{
+			
+		}
 
-		int randomPosition = (int) (Math.random() * 3);
+		int randomPosition = (int) (Math.random() * 4);
+		
 		if (currentInput != null)
 		{
 			if (randomPosition == 0)
@@ -86,7 +93,7 @@ public class Chatbot
 					result = "try again another time";
 				}
 			}
-			else
+			else if( randomPosition == 2)
 			{
 				if (memeChecker(currentInput))
 				{
@@ -97,13 +104,17 @@ public class Chatbot
 					result = "Not a meme, try again!";
 				}
 			}
+			else
+			{
+				//Talk about the user here :D
+			}
 			
 		}
 		else
 		{
 			result = "Use words!!";
 		}
-
+		updateChatCount();
 		return result;
 	}
 
@@ -194,6 +205,83 @@ public class Chatbot
 		return name;
 	}
 
+	public ArrayList<String> getMemeList()
+	{
+		return memeList;
+	}
+
+
+
+	public void setMemeList(ArrayList<String> memeList)
+	{
+		this.memeList = memeList;
+	}
+
+
+
+	public String getContentArea()
+	{
+		return contentArea;
+	}
+
+
+
+	public void setContentArea(String contentArea)
+	{
+		this.contentArea = contentArea;
+	}
+
+
+
+	public String getCurrentInput()
+	{
+		return currentInput;
+	}
+
+
+
+	public void setCurrentInput(String currentInput)
+	{
+		this.currentInput = currentInput;
+	}
+
+
+
+	public String getCurrentText()
+	{
+		return currentText;
+	}
+
+
+
+	public void setCurrentText(String currentText)
+	{
+		this.currentText = currentText;
+	}
+
+
+
+	public ChatbotUser getMyUser()
+	{
+		return myUser;
+	}
+
+
+
+	public void setMyUser(ChatbotUser myUser)
+	{
+		this.myUser = myUser;
+	}
+
+
+
+	public void setChatCount(int chatCount)
+	{
+		this.chatCount = chatCount;
+	}
+
+
+
 	/**
 	 * Returns the number of times Chatbot has chatted.
 	 * 
@@ -203,6 +291,8 @@ public class Chatbot
 	{
 		return chatCount;
 	}
+	
+	private ChatbotUser myUser;
 
 	/**
 	 * Sets the name.
