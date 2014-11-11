@@ -20,7 +20,8 @@ public class Chatbot
 	private int chatCount;
 	public String currentInput;
 	private String currentText;
-
+	private ArrayList<String> userInputList;
+	
 	/**
 	 * Creates a Chatbot object with the supplied name and initializes the
 	 * current number of chats to zero.
@@ -31,6 +32,7 @@ public class Chatbot
 	public Chatbot(String name)
 	{
 		memeList = new ArrayList<String>();
+		userInputList = new ArrayList<String>();
 		this.name = name;
 		chatCount = 0;
 		myUser = new ChatbotUser();
@@ -64,7 +66,8 @@ public class Chatbot
 		
 		if(getChatCount() < 7)
 		{
-			
+			//Ask questions about all data members here
+			//you will need ifs or a switch
 		}
 
 		int randomPosition = (int) (Math.random() * 4);
@@ -104,9 +107,26 @@ public class Chatbot
 					result = "Not a meme, try again!";
 				}
 			}
-			else
+			else if(randomPosition == 3)
 			{
 				//Talk about the user here :D
+			}
+			else if(randomPosition == 4)
+			{
+				//add to our list
+				userInputList.add(currentInput);
+				result = "Thank you for the comment";
+			}
+			else
+			{
+				if(userInputChecker(currentInput))
+				{
+					
+				}
+				else
+				{
+					
+				}
 			}
 			
 		}
@@ -116,6 +136,22 @@ public class Chatbot
 		}
 		updateChatCount();
 		return result;
+	}
+	
+	private boolean userInputChecker(String userInput)
+	{
+		boolean matchesInput = false;
+		
+		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+		{
+			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+			{
+				matchesInput = true;
+				userInputList.remove(loopCount);
+				loopCount--;
+			}
+		}
+		return matchesInput;
 	}
 
 	/**
