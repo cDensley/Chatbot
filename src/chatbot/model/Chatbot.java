@@ -6,17 +6,26 @@ import java.util.ArrayList;
  * The Chatbot model class. Used for checking and manipulating strings.
  * 
  * @author Chandler Densley
- * @version 1.1 9/26/14
+ * @version 1.4 11/11/14
  */
 public class Chatbot
 {
 
 	/**
-	 * Sets various things regarding the chatbot and user input.
+	 * The list for the meme checker.
 	 */
 	private ArrayList<String> memeList;
+	/**
+	 * The name of the Chatbot.
+	 */
 	private String name;
+	/**
+	 * The checker for the content area.
+	 */
 	private String contentArea;
+	/**
+	 * Counts the number of times that the Chatbot has chatted with the user.
+	 */
 	private int chatCount;
 	public String currentInput;
 	private String currentText;
@@ -39,8 +48,6 @@ public class Chatbot
 		fillTheMemeList();
 		contentArea = "music";
 	}
-	
-	
 
 	/**
 	 * Sets the list of memes for the meme checker.
@@ -64,15 +71,27 @@ public class Chatbot
 	{
 		String result = "";
 		
-		if(getChatCount() < 7)
+		if(getChatCount() < 5)
 		{
 			//Ask questions about all data members here
 			//you will need ifs or a switch
+			//assign via myUser.set...
+			if(getChatCount() == 0)
+			{
+				myUser.setUserName(currentInput);
+				result = "Good name " + myUser.getUserName() + " how old are you?";
+			}
+			else if(getChatCount() == 1)
+			{
+				int userAge = Integer.parseInt(currentInput);
+				myUser.setAge(userAge);
+			}
+			//continue for other user info fields
 		}
 
-		int randomPosition = (int) (Math.random() * 4);
+		int randomPosition = (int) (Math.random() * 6);
 		
-		if (currentInput != null)
+		if (currentInput != null && currentInput.length() > 0)
 		{
 			if (randomPosition == 0)
 			{
@@ -233,7 +252,6 @@ public class Chatbot
 
 	/**
 	 * Returns the name of the Chatbot object.
-	 * 
 	 * @return The current name of the Chatbot.
 	 */
 	public String getName()
