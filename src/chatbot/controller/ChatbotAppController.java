@@ -61,6 +61,11 @@ public class ChatbotAppController
 		// testPanel.showTextMessage(startMessage);
 	}
 	
+	/**
+	 * Gets the dialog from the Chatbot.
+	 * @param input Input from the user.
+	 * @return Chatbot dialog.
+	 */
 	public String getChatbotDialog(String input)
 	{
 		String result = "";
@@ -83,6 +88,5 @@ public class ChatbotAppController
 		System.exit(0);
 		
 	}
-	
 	
 }

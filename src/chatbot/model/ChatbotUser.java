@@ -5,11 +5,17 @@ public class ChatbotUser
 // four data members
 	//at least two different types (String, int, boolean, double....)
 	
+	/**
+	 * The name of
+	 */
 	private String userName;
 	private int age;
 	private boolean hasBrownHair;
 	private boolean needsCorrectiveLenses;
 	
+	/**
+	 * Information about the user.
+	 */
 	public ChatbotUser()
 	{
 		this.userName = "";

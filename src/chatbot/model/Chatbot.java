@@ -27,8 +27,17 @@ public class Chatbot
 	 * Counts the number of times that the Chatbot has chatted with the user.
 	 */
 	private int chatCount;
-	public String currentInput;
+	/**
+	 * The user's input.
+	 */
+	public String input;
+	/**
+	 * What the user just typed in.
+	 */
 	private String currentText;
+	/**
+	 * The list of user input.
+	 */
 	private ArrayList<String> userInputList;
 	
 	/**
@@ -64,10 +73,10 @@ public class Chatbot
 
 	/**
 	 * Selects one of the three checkers randomly and runs it.
-	 * @param currentInput Depending on what the user types.
+	 * @param input Depending on what the user types.
 	 * @return Based on user input.
 	 */
-	public String processText(String currentInput)
+	public String processText(String input)
 	{
 		String result = "";
 		
@@ -78,24 +87,24 @@ public class Chatbot
 			//assign via myUser.set...
 			if(getChatCount() == 0)
 			{
-				myUser.setUserName(currentInput);
+				myUser.setUserName(input);
 				result = "Good name " + myUser.getUserName() + " how old are you?";
 			}
 			else if(getChatCount() == 1)
 			{
-				int userAge = Integer.parseInt(currentInput);
+				int userAge = Integer.parseInt(input);
 				myUser.setAge(userAge);
 			}
-			//continue for other user info fields
+			
 		}
 
 		int randomPosition = (int) (Math.random() * 6);
 		
-		if (currentInput != null && currentInput.length() > 0)
+		if (input != null && input.length() > 0)
 		{
 			if (randomPosition == 0)
 			{
-				if (stringLengthChecker(currentInput))
+				if (stringLengthChecker(input))
 				{
 					result = "too long";
 				}
@@ -106,7 +115,7 @@ public class Chatbot
 			}
 			else if (randomPosition == 1)
 			{
-				if (contentChecker(currentInput))
+				if (contentChecker(input))
 				{
 					result = "yup you know the secret";
 				}
@@ -117,9 +126,9 @@ public class Chatbot
 			}
 			else if( randomPosition == 2)
 			{
-				if (memeChecker(currentInput))
+				if (memeChecker(input))
 				{
-					result = "Wow, " + currentInput + " is a meme. Wahoo!";
+					result = "Wow, " + input + " is a meme. Wahoo!";
 				}
 				else
 				{
@@ -133,30 +142,80 @@ public class Chatbot
 			else if(randomPosition == 4)
 			{
 				//add to our list
-				userInputList.add(currentInput);
+				userInputList.add(input);
 				result = "Thank you for the comment";
 			}
-			else
+			else if(randomPosition == 5)
 			{
-				if(userInputChecker(currentInput))
+				if (mashChecker(input))
 				{
-					
+					conversation = mashingDetected(input);
 				}
 				else
 				{
-					
+					conversation = noMashingDetected(input);
 				}
 			}
-			
-		}
-		else
-		{
-			result = "Use words!!";
-		}
-		updateChatCount();
-		return result;
+			else
+			{
+				if(userInputChecker(input))
+				{
+					conversation = "That was nice - you removed it from the list";
+				}
+				else
+				{
+					conversation = "That wasn't in the conversation before";
+				}
+			}
+		
+		return conversation;
 	}
 	
+	private String mashingDetected(String input)
+	{
+		String mashed = "";
+		
+		mashed = input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		
+		return mashed;
+	}
+	
+	private String noMashingDetected(String input)
+	{
+		String noMashing = "Thank you for not mashing your keyboard with";
+		if (input.length() > 1)
+		{
+			noMashing += input.substring(input.length()/3, input.length()/2);
+		}
+		return noMashing;
+	}
+		
+		/**
+		 * Checker for keyboard mashing.
+		 * @param userInput The user supplied text.
+		 * @return Where mashing has been detected.
+		 */
+	private boolean mashChecker(String userInput)
+	{
+		boolean isMashing = false;
+		
+		if(input.indexOf("sdf") > -1)
+		{
+			isMashing = true;
+		}
+		
+		return isMashing;
+	}
+	
+	/**
+	 * Tells whether or not the user input matches.
+	 * @param userInput What the user types in.
+	 * @return Based on if it matches or not.
+	 */
 	private boolean userInputChecker(String userInput)
 	{
 		boolean matchesInput = false;
@@ -175,14 +234,14 @@ public class Chatbot
 
 	/**
 	 * Checker for contentArea.
-	 * @param currentInput User input.
+	 * @param input User input.
 	 * @return Based on whether or not the user input is the contentArea.
 	 */
-	private boolean contentChecker(String currentInput)
+	private boolean contentChecker(String input)
 	{
 		boolean hasContent = false;
 		
-		if (currentInput.contains(contentArea))
+		if (input.contains(contentArea))
 		{
 			hasContent = true;
 		}
@@ -227,7 +286,7 @@ public class Chatbot
 		{
 			if (memeList.get(loopCount).equalsIgnoreCase(currentText))
 			{
-				isAMeme = true;
+				isAMeme =        true;
 			}
 		}
 
@@ -259,82 +318,64 @@ public class Chatbot
 		return name;
 	}
 
+	/**
+	 * Returns the content of the meme list.
+	 * @return The content of the meme list.
+	 */
 	public ArrayList<String> getMemeList()
 	{
 		return memeList;
 	}
-
-
 
 	public void setMemeList(ArrayList<String> memeList)
 	{
 		this.memeList = memeList;
 	}
 
-
-
 	public String getContentArea()
 	{
 		return contentArea;
 	}
-
-
 
 	public void setContentArea(String contentArea)
 	{
 		this.contentArea = contentArea;
 	}
 
-
-
-	public String getCurrentInput()
+	public String getinput()
 	{
-		return currentInput;
+		return input;
 	}
 
-
-
-	public void setCurrentInput(String currentInput)
+	public void setinput(String input)
 	{
-		this.currentInput = currentInput;
+		this.input = input;
 	}
-
-
 
 	public String getCurrentText()
 	{
 		return currentText;
 	}
 
-
-
 	public void setCurrentText(String currentText)
 	{
 		this.currentText = currentText;
 	}
-
-
 
 	public ChatbotUser getMyUser()
 	{
 		return myUser;
 	}
 
-
-
 	public void setMyUser(ChatbotUser myUser)
 	{
 		this.myUser = myUser;
 	}
 
-
-
 	public void setChatCount(int chatCount)
 	{
 		this.chatCount = chatCount;
 	}
-
-
 
 	/**
 	 * Returns the number of times Chatbot has chatted.
